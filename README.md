@@ -1,46 +1,56 @@
-# Getting Started with Create React App
+# Particle Componentinin Ayarları      
+### Partikül büyüklüğü için bu satırdaki değer değiştirilmeli, +1 olmasının nedeni 0 büyüklüğünde bir partikül oluşturmaması için
+    this.size = Math.random() * 25 + 1;
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Partiküllerin x ve y kordinatlarındaki hareket hızlarını ayarlamak için bu kısımda değişiklik yapılabilir. Öeneğin speedX i arttırmak partikülün x ekseninda daha hızlı hareket deceğini, y ekseninde daha yavaş hareket edeceğini gösterir.
+      this.speedX = Math.random() * 8 -1.5;
+      this.speedY = Math.random() * 8 -1.5;
 
-## Available Scripts
 
-In the project directory, you can run:
+### Her bir tıklama ve mouse hareketinde ortaya çıkan partikül sayısını değiştirmek için döngüdeki sınırı arttırabilirsiniz.
+    const handleClick = (event: MouseEvent) => {
+      mouse.x = event.x;
+      mouse.y = event.y;
+      for (let i = 0; i < 10; i++) {
+        particlesArray.push(new Particle());
+      }
+    };
+### Ayrıca diğer döngüdeki sınırıda değiştirmeniz lazım
 
-### `npm start`
+    const handleMouseMove = (event: MouseEvent) => {
+      mouse.x = event.x;
+      mouse.y = event.y;
+      for (let i = 0; i < 5; i++) {
+        particlesArray.push(new Particle());
+      }
+    };
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Ağlanmayı arttırma veya azaltma için buradaki sınırı ayarlayabilirsiniz, eğer 150 ise kendinden 150 pixel uzakliktaki partiküle bağlanacaktır bu sınır ne kadar arttılırsa o kadar çok ağlanma olur
 
-### `npm test`
+          if (distance < 150) {
+            ctx.beginPath();
+            ctx.strokeStyle = particlesArray[i].color;
+            ctx.lineWidth = 0.2;
+            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+            ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+            ctx.stroke();
+            ctx.closePath();
+          }
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Partiküllerin kaybolması buradakisınıra göre gerçekleşir, boyutu 0.2 nin altına inen partiküller diziden silinir
+        if (particlesArray[i].size <= 0.2) {
+          particlesArray.splice(i, 1);
+          i--;
+        }
 
-### `npm run build`
+### Buradaki hue değeri rengi temsil eder renk değişimini burayla oynayarak ayarlayabilirsiniz ve ayrıca arka plan rengini de ctx.fillStyle parametresine atama yaparak değiştirebilirsiniz
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    const animate = () => {
+        ctx.fillStyle = 'black';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      handleParticles();
+      hue += 2;
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+      requestAnimationFrame(animate);
+    };
