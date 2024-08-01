@@ -1,0 +1,53 @@
+/* Navbar Genel Stil */
+.navbar {
+    background-color: #1a1a1a;
+    border-bottom: 2px solid #444;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar Konteyner */
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+/* Home Linki İçin Stil */
+.nav-link-home {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin-right: auto; /* Sola yaslamak için */
+    transition: color 0.3s ease-in-out;
+}
+
+/* Diğer Linkler İçin Stil */
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin: 0 1rem;
+    transition: color 0.3s ease-in-out;
+}
+
+/* Hover Durumu İçin Stil */
+.nav-link:hover, .nav-link-home:hover {
+    color: #ff4500;
+}
+
+/* Aktif Link İçin Stil */
+.nav-link-active, .nav-link-home-active {
+    color: #ff4500;
+}
+
+/* Mobil Ekranlar İçin Stil */
+@media (max-width: 768px) {
+    .navbar-container {
+        flex-direction: column;
+    }
+
+    .nav-link, .nav-link-home {
+        margin: 0.5rem 0;
+    }
+}

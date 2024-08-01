@@ -1,0 +1,22 @@
+.App {
+  text-align: center;
+}
+
+.canvasBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 500px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+}
+
+canvas {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+}
